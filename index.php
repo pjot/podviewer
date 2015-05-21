@@ -25,7 +25,6 @@ $json = json_encode($content);
             </div>
             <div class="row">
                 <div class="col-md-4 episodes">
-                    <h4>Episodes</h4>
                     <div class="list-group" style="overflow: scroll; height: 500px;">
                         <?php foreach ($content->items as $item): ?>
                         <a href="#" class="list-group-item" rel="<?php echo $item->id; ?>">
