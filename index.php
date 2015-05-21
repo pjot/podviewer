@@ -24,9 +24,9 @@ $json = json_encode($content);
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 episodes">
                     <h4>Episodes</h4>
-                    <div class="list-group scroll-list" style="overflow: scroll; height: 500px;">
+                    <div class="list-group" style="overflow: scroll; height: 500px;">
                         <?php foreach ($content->items as $item): ?>
                         <a href="#" class="list-group-item" rel="<?php echo $item->id; ?>">
                             <div class="row">
@@ -42,12 +42,12 @@ $json = json_encode($content);
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 movie">
                     <div class="panel panel-default player" style="display: none;">
                         <div class="panel-heading">
                             <h3 class="panel-title" id="current_title"></h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="padding: 0;">
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe id="current_movie" class="embed-responsive-item" src="" allowfullscreen=""></iframe>
                             </div>

@@ -11,6 +11,20 @@ Podviewer.getItem = function (id)
     return false;
 };
 
+Podviewer.setView = function (view) {
+    switch (view)
+    {
+        case 'movie':
+            $('.episodes').hide();
+            $('.movie').removeClass('col-md-8').addClass('col-md-12');
+            break;
+        case 'episodes':
+            $('.episodes').show();
+            $('.movie').removeClass('col-md-12').addClass('col-md-8');
+            break;
+    }
+};
+
 Podviewer.moveList = function () {
     var current = $('.list-group-item-info'),
         current_top = current.position().top,
@@ -73,6 +87,7 @@ Podviewer.toggleVolumeIcon = function () {
 $(document).ready(function () {
     $('.list-group-item:first').addClass('list-group-item-info');
     $(document).on('keydown', function (event) {
+        console.log(event);
         event.preventDefault();
         switch (event.keyCode)
         {
@@ -84,6 +99,12 @@ $(document).ready(function () {
                 break;
             case 13:
                 Podviewer.view();
+                break;
+            case 39:
+                Podviewer.setView('movie');
+                break;
+            case 37:
+                Podviewer.setView('episodes');
                 break;
         }
     });
