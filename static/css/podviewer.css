@@ -1,1 +1,40 @@
-.template { display: none; }
+.template
+{
+    display: none;
+}
+.container-fluid
+{
+    padding: 0px;
+}
+.playing
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+.playing
+{
+    display: none;
+}
+.active .playing
+{
+    display: block;
+}
+.movie.col-md-8
+{
+    margin-left: -20px;
+}
+.episodes .list-group
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 600px;
+    overflow: hidden;
+}
+.app-border 
+{
+    height: 720px;
+    width: 1280px;
+    border: 1px solid black;
+    margin: 5px;
+}
+
