@@ -78,16 +78,45 @@ Podviewer.view = function () {
     $('#current_description').html(item.description);
 };
 
+Podviewer.addItem = function (item)
+{
+    var html = $('#item').html();
+    html = html.replace('{id}', item.id);
+    html = html.replace('{title}', item.title);
+    html = html.replace('{date}', item.date);
+    $('.episodes .list-group').append(html);
+};
+
+Podviewer.loadPodcast = function (podcast)
+{
+    $.getJSON('ajax.php?podcast=' + podcast, function (data) {
+        Podviewer.podcast = data;
+        Podviewer.loadItems();
+    });
+};
+
 Podviewer.toggleVolumeIcon = function () {
     var elements = $('.playing');
     elements.toggleClass('glyphicon-volume-up');
     elements.toggleClass('glyphicon-volume-down');
 };
 
-$(document).ready(function () {
+Podviewer.loadItems = function ()
+{
+    $('#podcast_title').html(Podviewer.podcast.title);
+    $('#podcast_description').html(Podviewer.podcast.description);
+    $('.episodes .list-group').html(''); 
+    for (i in Podviewer.podcast.items)
+    {
+        item = Podviewer.podcast.items[i];
+        Podviewer.addItem(item);
+    }
     $('.list-group-item:first').addClass('list-group-item-info');
+};
+
+$(document).ready(function () {
+    Podviewer.loadPodcast(Podviewer.initial);
     $(document).on('keydown', function (event) {
-        console.log(event);
         event.preventDefault();
         switch (event.keyCode)
         {

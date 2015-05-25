@@ -2,9 +2,11 @@
 
 class CNNClient
 {
-    public function __construct($url)
+    protected static $base_url = 'http://rss.cnn.com/services/podcasting/%s/rss';
+
+    public function __construct($podcast)
     {
-        $this->url = $url;
+        $this->url = sprintf(self::$base_url, $podcast);
     }
 
     public function retrieveXML()
@@ -22,17 +24,15 @@ class CNNClient
 
         $xml_items = $xml->xpath('channel/item');
         $podcast->items = array();
-        $i = 1;
         foreach ($xml_items as $item_xml)
         {
             $date = DateTime::createFromFormat('D, d M Y H:i:s T', (string) $item_xml->pubDate);
             $item = new stdClass;
-            $item->id = $i;
             $item->title = (string) $item_xml->title;
             $item->description = strip_tags((string) $item_xml->description);
+            $item->id = md5($item->description);
             $item->date = $date->format('Y-m-d H:i');
             $item->url = (string) $item_xml->link;
-            $i++;
 
             $podcast->items[] = $item;
         }
